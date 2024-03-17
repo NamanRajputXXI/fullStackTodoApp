@@ -1,13 +1,18 @@
-import Link from "next/link";
-import React from "react";
+import { auth } from 'auth'
+import React from 'react'
 
-const page = () => {
-  return (
-    <div>
-      <h1>This is todo Page</h1>
-      <Link href={"/SignIn"}>Sign Out</Link>
-    </div>
-  );
-};
+const page = async () => {
+    const session = await auth();
+    if (!session || !session.user) return (
+        <div>
+            <p>You need to sign in </p>
+        </div>
+    )
+    return (
+        <div>
+            Create your todo
+        </div>
+    )
+}
 
-export default page;
+export default page
